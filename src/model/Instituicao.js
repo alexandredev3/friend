@@ -27,10 +27,21 @@ const Instituicao = connection.define('institution', {
     }, open_on_weekends: {
         type: Sequelize.INTEGER,
         allowNull: false
+    },
+    userId: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: User,
+            key: 'id',
+        }
     }
 });
 
-//Instituicao.belongsTo(User);
+Instituicao.belongsTo(User, {
+    foreignKey: {
+        name: 'userId'
+    }
+});
 
 // Essa linha de baixo sincroniza a model com banco de dados
 Instituicao.sync({force: false}); // Uma instituição pertence a um usuario

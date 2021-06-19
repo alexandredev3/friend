@@ -1,5 +1,5 @@
 function permissao(req, res, next) {
-    if (req.session.user != undefined) {
+    if (req.session.userId != undefined) {
         next();
     } else {
         res.redirect("/");

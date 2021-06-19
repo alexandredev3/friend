@@ -4,6 +4,8 @@ const Instituicao = require('../model/Instituicao');
 const permissao = require('../middlewares/middlewar');
 
 router.get('/create-instituicao', permissao,(req, res) => {
+    console.log("USERID", req.session.userId)
+
     return res.render('create-instituicao');
 });
 
@@ -16,6 +18,7 @@ router.post('/create-instituicao/save', permissao,(req, res) => {
     const instructions = req.body.instructions;
     const opening_hours = req.body.opening_hours;
     const open_on_weekends = req.body.open_on_weekends;
+    const user_id = req.session.userId;
 
     Instituicao.create({
         lat: lat,
@@ -25,7 +28,8 @@ router.post('/create-instituicao/save', permissao,(req, res) => {
         whatsapp: whatsapp,
         instructions: instructions,
         opening_hours: opening_hours,
-        open_on_weekends: open_on_weekends
+        open_on_weekends: open_on_weekends,
+        userId: user_id,
     }).then(() => {
         res.redirect('/instituicao');
     });

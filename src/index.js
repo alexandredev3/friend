@@ -4,6 +4,7 @@ const connection = require("./database/database");
 const path = require('path');
 const router = require('./routes');
 const session = require("express-session");
+const cookieParser = require('cookie-parser');
 
 // Iniciando o express
 const app = express();
@@ -25,6 +26,8 @@ connection
         console.log(error);
     });
 
+app.use(cookieParser());
+
 // Configurando o View engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -33,8 +36,8 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 // Configurando o Body parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json()); // BodyParse esta deprecated, pode usar o express.json() ao inves.
+app.use(express.urlencoded({ extended: true })); // mesma coisa para o urlencoded
 
 // Rota index
 app.get('/', (req, res) => {
