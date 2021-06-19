@@ -61,6 +61,7 @@ router.post("/autenticate", async (req, res) => {
  
   req.session.userId = user.id;
 
+  // salvando o id do usuario nos cookie
   res.cookie('userId', String(user.id), {
     maxAge: 90000,
     httpOnly: true,

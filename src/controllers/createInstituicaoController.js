@@ -18,7 +18,7 @@ router.post('/create-instituicao/save', permissao,(req, res) => {
     const instructions = req.body.instructions;
     const opening_hours = req.body.opening_hours;
     const open_on_weekends = req.body.open_on_weekends;
-    const user_id = req.session.userId;
+    const user_id = req.session.userId; // req.session.userId: vai retornar o userId que salvei la no cookies
 
     Instituicao.create({
         lat: lat,
